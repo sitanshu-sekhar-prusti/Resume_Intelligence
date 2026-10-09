@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Resume Intelligence</title>
+<style>
+:root{--bg:#fff6ef;--bg2:#efeaff;--card:#fff;--tx:#201a33;--mu:#6d6682;--bd:#eadfd6;--ac:#7c3aed;--ac2:#f43f5e;--ac3:#0d9488;--ok:#059669;--bad:#e11d48;--warn:#d97706;--sh:0 8px 24px rgba(124,58,237,.10);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14101f;--bg2:#1d1233;--card:#1f1930;--tx:#f5f0ff;--mu:#b2a8cc;--bd:#352c4d;--ac:#a78bfa;--ac2:#fb7185;--ac3:#2dd4bf;--ok:#34d399;--bad:#fb7185;--warn:#fbbf24;--sh:0 8px 24px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#14101f;--bg2:#1d1233;--card:#1f1930;--tx:#f5f0ff;--mu:#b2a8cc;--bd:#352c4d;--ac:#a78bfa;--ac2:#fb7185;--ac3:#2dd4bf;--ok:#34d399;--bad:#fb7185;--warn:#fbbf24;--sh:0 8px 24px rgba(0,0,0,.35)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);background-image:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 100%);background-attachment:fixed;color:var(--tx);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+header{padding:34px 16px 10px;max-width:980px;margin:auto}
+h1{margin:0;font-size:32px;letter-spacing:-.5px}
+h1 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{margin:6px 0 0;color:var(--mu);max-width:640px}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.steps b{font-size:13px;padding:5px 12px;border-radius:999px;background:var(--card);border:1px solid var(--bd);box-shadow:var(--sh)}
+.steps b:nth-child(1){color:var(--ac3)}.steps b:nth-child(2){color:var(--ac2)}.steps b:nth-child(3){color:var(--ac)}.steps b:nth-child(4){color:var(--warn)}
+main{max-width:980px;margin:auto;padding:14px 16px 48px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:var(--sh)}
+.c1{border-top:5px solid var(--ac3)}.c2{border-top:5px solid var(--ac2)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:720px){.grid{grid-template-columns:1fr}}
+label{font-weight:700;display:block;margin-bottom:8px;font-size:16px}
+textarea{width:100%;min-height:220px;border:1px solid var(--bd);border-radius:12px;padding:12px;background:var(--bg);color:var(--tx);font:13px/1.5 ui-monospace,monospace;resize:vertical}
+textarea:focus{outline:2px solid var(--ac);border-color:transparent}
+button{background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;border:0;border-radius:12px;padding:11px 22px;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 6px 16px rgba(244,63,94,.25)}
+button:hover{filter:brightness(1.07)}
+button.alt{background:transparent;color:var(--ac);border:1px solid var(--ac);box-shadow:none}
+input[type=file]{font-size:13px;color:var(--mu);max-width:100%}
+input[type=file]::file-selector-button{background:var(--bg);color:var(--ac);border:1px solid var(--ac);border-radius:999px;padding:7px 14px;font-weight:600;margin-right:10px;cursor:pointer}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px;padding-bottom:4px}
+.tab{background:var(--card);color:var(--mu);border:1px solid var(--bd);padding:9px 18px;border-radius:999px;white-space:nowrap;box-shadow:none}
+.tab.on{background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(124,58,237,.3)}
+.big{font-size:60px;font-weight:900;line-height:1;background:linear-gradient(90deg,var(--ac3),var(--ac));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bar{height:12px;background:var(--bd);border-radius:8px;overflow:hidden;margin:8px 0 14px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac3),var(--ac),var(--ac2));border-radius:8px}
+.chip{display:inline-block;padding:3px 11px;border-radius:999px;font-size:13px;font-weight:600;margin:3px 4px 3px 0;border:1px solid;background:color-mix(in srgb,currentColor 12%,transparent)}
+.ok{color:var(--ok);border-color:var(--ok)}.bad{color:var(--bad);border-color:var(--bad)}.warn{color:var(--warn);border-color:var(--warn)}
+.mu{color:var(--mu)}.sm{font-size:13px}h3{margin:16px 0 6px;font-size:16px}
+ul{margin:6px 0;padding-left:20px}li{margin:6px 0}.chk{display:flex;gap:8px;align-items:flex-start;margin:7px 0}.hide{display:none}
+.wk{border-left:4px solid var(--ac3);background:color-mix(in srgb,var(--ac3) 8%,transparent);border-radius:0 12px 12px 0;padding:8px 12px;margin:12px 0}
+.wk:nth-child(3n+2){border-color:var(--ac2);background:color-mix(in srgb,var(--ac2) 8%,transparent)}.wk:nth-child(3n){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 8%,transparent)}
+</style>
+</head>
+<body>
+<header><h1>Resume <span>Intelligence</span></h1>
+<p>Upload or paste your resume and a job description to get a match score, ATS-style checks, a learning roadmap and interview questions. Everything runs in your browser.</p>
+<div class="steps"><b>1. Add resume</b><b>2. Add job description</b><b>3. Analyze</b><b>4. Improve</b></div></header>
+<main>
+<section><div class="grid">
+<div class="card c1"><label for="res">Your resume</label><textarea id="res" placeholder="Paste resume text, or upload a PDF below..."></textarea>
+<div class="row"><input type="file" id="file" accept=".pdf,.txt,.md"><button class="alt" id="demo">Load sample</button></div><div class="mu sm" id="fst"></div></div>
+<div class="card c2"><label for="jd">Job description</label><textarea id="jd" placeholder="Paste the full job description here..."></textarea>
+<div class="row"><input type="file" id="jfile" accept=".pdf,.txt,.md"></div><div class="mu sm" id="jst"></div><div class="row"><button id="go">Analyze</button><span class="mu" id="err"></span></div></div>
+</div></section>
+<section id="out" class="hide"><div class="tabs" id="tabs"></div><div id="view"></div></section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+(function(){
+var C={
+python:{n:"Python",a:["python"]},java:{n:"Java",a:["java"]},sql:{n:"SQL",a:["sql","mysql","postgresql","postgres","sqlite"]},
+dsa:{n:"Data Structures & Algorithms",a:["dsa","data structures","algorithms"]},
+ml:{n:"Machine Learning",a:["machine learning","ml models"]},sk:{n:"Scikit-learn",a:["scikit-learn","scikit learn","sklearn"]},
+dl:{n:"Deep Learning",a:["deep learning","cnn","neural network","tensorflow","pytorch"]},
+da:{n:"Data Analytics",a:["data analytics","data analysis","exploratory data analysis","eda"]},
+pandas:{n:"Pandas",a:["pandas"]},numpy:{n:"NumPy",a:["numpy"]},
+viz:{n:"Data Visualization",a:["data visualization","data visualisation","visualization","dashboards","charts","matplotlib","seaborn","power bi","tableau","tableu"]},
+bi:{n:"Power BI / Tableau",a:["power bi","tableau","tableu"]},
+oop:{n:"OOP",a:["oop","object-oriented","object oriented"],imp:["java"]},
+db:{n:"Databases",a:["database","databases","dbms","nosql","mongodb"],gen:1,imp:["sql"]},
+git:{n:"Git/GitHub",a:["git","github","gitlab"]},rest:{n:"REST APIs",a:["rest api","restful","rest endpoints","rest"]},
+genai:{n:"Generative AI / LLMs",a:["generative ai","genai","llm","large language model","chatgpt","openai","gemini"]},
+prompt:{n:"Prompt Engineering",a:["prompt engineering","prompt"]},rag:{n:"RAG / Vector DBs",a:["rag","vector database","vector db","chromadb","faiss","embeddings"]},
+fastapi:{n:"FastAPI / Flask",a:["fastapi","flask","django"]},cloud:{n:"Cloud",a:["cloud","aws","azure","gcp"]},
+stats:{n:"Statistics",a:["statistics","statistical","probability"]},
+spring:{n:"Spring Boot",a:["spring boot","spring"]},docker:{n:"Docker",a:["docker","kubernetes"]},react:{n:"React",a:["react"]},js:{n:"JavaScript",a:["javascript","js"]}};
+var TASK={python:["Core Python, functions, OOP","Automate a data task"],sql:["Joins, aggregates, indexes","Write 15 queries on a sample database"],oop:["Four OOP pillars with Java examples","Refactor a project into classes"],
+db:["Normalization, keys, transactions","Design a 4-table schema"],stats:["Descriptive stats, distributions, probability, hypothesis tests","Analyze a dataset and report findings"],
+prompt:["Prompt patterns: roles, few-shot, structured output","Build a prompt set for a small task and compare results"],rag:["Embeddings, chunking, vector search","Build a small RAG Q&A over your own notes"],
+genai:["How LLMs work, API usage, limits","Build a simple app that calls an LLM API"],fastapi:["FastAPI routes, validation","Wrap an ML model in an API"],cloud:["Core cloud services: compute, storage, IAM","Deploy a small app"],
+rest:["HTTP, status codes, REST design","Build a CRUD API"],git:["Branching and merging","Publish a project with a README"],dl:["Neural network basics, CNNs","Train a small model"],sk:["Pipelines, metrics, model selection","Compare 3 models on one dataset"],bi:["Dashboards and DAX basics","Build a 1-page dashboard"]};
+var VERBS=["built","developed","designed","implemented","created","led","optimized","reduced","improved","deployed","automated","integrated","analyzed","trained","cleaned","raised"];
+var WEAK=["responsible for","worked on","helped with","duties included","familiar with"];
+var STOP="the and with for from that this have will your you are our able work into using use basic strong knowledge understanding fundamentals skills experience".split(" ");
+var SAMPLE_R="Jane Doe\njane@example.com | +91 98765 43210\n\nEducation\nB.Tech Computer Science, 2028 (Expected)\n\nSkills\nJava, Python, SQL, Git\n\nProjects\nLibrary System - Developed a browser-based system using HTML, CSS and JavaScript for 500+ book records.\n\nExperience\nIntern - Built 5 REST API endpoints with Python and MySQL.";
+var SAMPLE_J="Software Developer Intern\n\nRequired Skills\n- Java and OOP\n- SQL\n- Git\n- REST APIs\n- Spring Boot\n\nPreferred Skills\n- Docker\n- Cloud fundamentals";
+var $=function(i){return document.getElementById(i)};
+function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
+var RX={};Object.keys(C).forEach(function(k){RX[k]=C[k].a.map(function(a){return new RegExp("(^|[^a-z0-9+#])"+esc(a)+"(s|es)?($|[^a-z0-9+#])","i")})});
+function hit(t,k){return RX[k].some(function(r){return r.test(t)})}
+function ev(res,k){var L=res.split("\n");for(var i=0;i<L.length;i++)if(hit(L[i],k)&&!/https?:/.test(L[i]))return L[i].trim().slice(0,120);return ""}
+function parseJD(j){var o={req:[],pref:[]},m=null;
+j.split("\n").forEach(function(raw){var l=raw.trim();if(!l)return;var h=l.replace(/[:\-*•\s]+$/,"");
+if(/^(required|must[- ]have|minimum|key requirements|requirements|qualifications)\b/i.test(h)&&h.length<45){m="req";return}
+if(/^(preferred|nice to have|good to have|bonus|desirable)\b/i.test(h)&&h.length<45){m="pref";return}
+if(/^(educational|what you|candidate profile|about|key responsibilities|responsibilities|benefits|location|job type|experience|salary|how to)/i.test(h)&&h.length<45){m=null;return}
+if(m&&/^[*•\-–\d.)\s]/.test(raw)||m&&l.length<70)o[m].push(l.replace(/^[*•\-–\d.)\s]+/,""))});
+if(!o.req.length){var ids=Object.keys(C).filter(function(k){return hit(j,k)&&!C[k].gen});o.req=ids.map(function(k){return C[k].n})}
+return o}
+function words(s){return s.toLowerCase().split(/[^a-z0-9+#]+/).filter(function(w){return w.length>3&&STOP.indexOf(w)<0})}
+function evalReq(line,res,w){var ids=Object.keys(C).filter(function(k){return hit(line,k)});
+if(ids.length>1)ids=ids.filter(function(k){return !C[k].gen});
+var sc,evd="";
+if(ids.length){var vals=ids.map(function(k){if(hit(res,k)){evd=evd||ev(res,k);return 1}
+var im=(C[k].imp||[]).filter(function(x){return hit(res,x)});if(im.length){evd=evd||ev(res,im[0]);return .5}return 0});
+sc=/\bor\b|\//i.test(line)?Math.max.apply(null,vals):vals.reduce(function(a,b){return a+b},0)/vals.length}
+else{var ws=words(line),f=ws.filter(function(x){return res.toLowerCase().indexOf(x)>-1}).length;sc=ws.length?(f/ws.length>=.6?1:f/ws.length>=.34?.5:0):0}
+return {label:line,ids:ids,score:sc,w:w,ev:evd}}
+function gradYear(t){var m=t.match(/20\d\d/g);return m||[]}
+function analyze(r,j){var p=parseJD(j),items=p.req.map(function(l){return evalReq(l,r,2)}).concat(p.pref.map(function(l){return evalReq(l,r,1)}));
+var den=0,num=0;items.forEach(function(i){den+=i.w;num+=i.w*i.score});var score=den?Math.round(num/den*100):0;
+var lc=r.toLowerCase(),wc=r.split(/\s+/).filter(Boolean).length,ch=[];function ck(n,ok,msg,w){ch.push({n:n,ok:ok,msg:msg,w:w})}
+ck("Email",/[\w.+-]+@[\w-]+\.[\w.]+/.test(r),"Include a professional email address.",10);
+ck("Phone",/\+?\d[\d\s()-]{8,}\d/.test(r),"Add a phone number.",5);
+["education","skills","projects","experience"].forEach(function(h){ck("Section: "+h,new RegExp("^\\s*"+h,"im").test(r),"Add a clearly titled "+h.toUpperCase()+" section.",10)});
+var vc=VERBS.filter(function(v){return lc.indexOf(v)>-1}).length;ck("Action verbs",vc>=3,"Use more action verbs (found "+vc+").",10);
+var nums=(r.match(/\d+\+?%?/g)||[]).length;ck("Quantified results",nums>=5,"Add measurable results (users, records, % gains).",15);
+var wk=WEAK.filter(function(x){return lc.indexOf(x)>-1});ck("Weak phrases",!wk.length,"Rewrite weak phrases: "+wk.join(", ")+".",10);
+ck("Length",wc>=150&&wc<=900,"Resume has "+wc+" words; aim for about 150 to 900.",10);
+var jy=gradYear(j.split(/educational/i)[1]||""),ry=gradYear((r.match(/b\.?tech[^\n]*\n?[^\n]*|20\d\d\s*\(expected\)/ig)||[]).join(" "));
+var okY=!jy.length||ry.some(function(y){return jy.indexOf(y)>-1});ck("Graduation year fit",okY,"JD mentions "+jy.join(", ")+"; check your graduation year is clear.",5);
+var kw=den?Math.round(num/den*100):0,tot=0,got=0;ch.forEach(function(c){tot+=c.w;if(c.ok)got+=c.w});
+return {score:score,items:items,checks:ch,ats:Math.round((got/tot*.7+kw/100*.3)*100)}}
+function bar(p){return '<div class="bar"><i style="width:'+p+'%"></i></div>'}
+function list(a,cls,note){return a.length?'<ul>'+a.map(function(i){return '<li><span class="chip '+cls+'">'+i.label+(i.w==1?' (preferred)':'')+'</span>'+(i.ev?'<div class="mu sm">Evidence: '+i.ev.replace(/</g,"&lt;")+'</div>':note?'<div class="mu sm">'+note+'</div>':'')+'</li>'}).join("")+'</ul>':'<p class="mu">None</p>'}
+var R,cur=0;
+function split(){return {m:R.items.filter(function(i){return i.score>=1}),p:R.items.filter(function(i){return i.score>0&&i.score<1}),x:R.items.filter(function(i){return i.score==0})}}
+function roadmap(){var s=split(),g=s.x.concat(s.p);if(!g.length)return '<p>No gaps found. Deepen your projects and practice interviews.</p>';
+return g.map(function(i,n){var t=TASK[i.ids[0]]||["Learn "+i.label+" from official documentation","Use it in a small project"];
+return '<div class="wk"><b>Week '+(n+1)+': '+i.label+'</b><div class="chk"><input type="checkbox" id="w'+n+'"><label for="w'+n+'" style="font-weight:400;margin:0">Study: '+t[0]+'</label></div><div class="chk"><input type="checkbox" id="p'+n+'"><label for="p'+n+'" style="font-weight:400;margin:0">Practice: '+t[1]+'</label></div></div>'}).join("")+'<div class="wk"><b>Final week: capstone</b><div class="mu">Combine the new skills in one project and add measurable results to your resume.</div></div>'}
+function questions(){var s=split(),q=[];s.m.slice(0,3).forEach(function(i){q.push(["Strength","Explain "+i.label+" and give an example from your projects."])});
+s.x.concat(s.p).slice(0,3).forEach(function(i){q.push(["Gap","You have little or no evidence of "+i.label+". How would you get productive with it quickly?"])});
+q.push(["Project","Walk me through your most complex project: design, data, and one trade-off you made."]);q.push(["Behavioral","Describe a time you were stuck on a bug and how you resolved it."]);q.push(["Role","What would you build in your first month in this role?"]);
+return '<ol>'+q.map(function(x){return '<li><span class="chip warn">'+x[0]+'</span> '+x[1]+'</li>'}).join("")+'</ol>'}
+var TABS=[["Match",function(){var s=split();return '<div class="card"><div class="row" style="margin:0"><div class="big">'+R.score+'%</div><div class="mu">overall match<br>required items count double, partial counts half</div></div>'+bar(R.score)+
+'<h3>Matched ('+s.m.length+')</h3>'+list(s.m,"ok")+'<h3>Partial ('+s.p.length+')</h3>'+list(s.p,"warn","Only indirect evidence. Make it explicit on your resume if true.")+'<h3>Missing ('+s.x.length+')</h3>'+list(s.x,"bad","Not found in your resume.")+'</div>'}],
+["ATS-style",function(){return '<div class="card"><div class="big">'+R.ats+'%</div><div class="mu">ATS-style estimate (70% structure and content, 30% keywords), not a real ATS result.</div>'+bar(R.ats)+R.checks.map(function(c){return '<div class="chk"><span class="chip '+(c.ok?'ok':'bad')+'">'+(c.ok?'Pass':'Fix')+'</span><div><b>'+c.n+'</b>'+(c.ok?'':'<div class="mu">'+c.msg+'</div>')+'</div></div>'}).join("")+'</div>'}],
+["Roadmap",function(){return '<div class="card"><h3 style="margin-top:0">Learning roadmap</h3>'+roadmap()+'</div>'}],
+["Interview",function(){return '<div class="card"><h3 style="margin-top:0">Practice questions</h3>'+questions()+'</div>'}]];
+function render(){$("tabs").innerHTML=TABS.map(function(t,i){return '<button class="tab'+(i==cur?' on':'')+'" data-i="'+i+'">'+t[0]+'</button>'}).join("");$("view").innerHTML=TABS[cur][1]()}
+async function readPdf(f){var pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise,out="";
+for(var p=1;p<=pdf.numPages;p++){var c=await(await pdf.getPage(p)).getTextContent(),y=null;
+c.items.forEach(function(it){var yy=Math.round(it.transform[5]);if(y!==null&&Math.abs(yy-y)>3)out+="\n";else if(y!==null)out+=" ";out+=it.str;y=yy});out+="\n"}return out}
+if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+window.__RI={analyze:analyze,parseJD:parseJD};
+if(typeof document==="undefined"||!document.getElementById("tabs"))return;
+$("tabs").addEventListener("click",function(e){var i=e.target.getAttribute("data-i");if(i!==null){cur=+i;render()}});
+$("go").onclick=function(){var r=$("res").value.trim(),j=$("jd").value.trim();if(r.length<50||j.length<20){$("err").textContent="Please add both a resume and a job description.";return}
+$("err").textContent="";R=analyze(r,j);cur=0;$("out").classList.remove("hide");render();$("out").scrollIntoView({behavior:"smooth"})};
+function wc(){var n=$("res").value.split(/\s+/).filter(Boolean).length;$("fst").textContent=n?("Resume text: "+n+" words"+(n<150?" (too short for a full resume; the PDF may not have been read fully, or the sample is loaded)":"")):""}
+$("res").addEventListener("input",wc);
+$("demo").onclick=function(){$("res").value=SAMPLE_R;$("jd").value=SAMPLE_J;wc()};
+function bind(fid,tid,sid,after){$(fid).onchange=async function(e){var f=e.target.files[0];if(!f)return;$(sid).textContent="Reading "+f.name+"...";try{$(tid).value=/\.pdf$/i.test(f.name)?await readPdf(f):await f.text();after()}catch(x){$(sid).textContent="Could not read the file. Please paste the text instead."}}}
+function jw(){var n=$("jd").value.split(/\s+/).filter(Boolean).length;$("jst").textContent=n?"Job description: "+n+" words":""}
+$("jd").addEventListener("input",jw);bind("file","res","fst",wc);bind("jfile","jd","jst",jw);
+})();
+</script>
+</body>
+</html>
